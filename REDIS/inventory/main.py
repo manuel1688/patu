@@ -1,11 +1,3 @@
-# python3 -m venv venv
-# venv\Scripts\activate
-#pip install fastapi
-#pip install "uvicorn[standard]"
-#pip install redis-om
-# uvicorn main:app --reload --port 8000
-
-from turtle import st
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from redis_om import get_redis_connection,HashModel 
@@ -14,15 +6,15 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['http://localhost:3000'],
+    allow_origins=['http://localhost:3001','http://localhost:3000'],
     allow_methods=['*'],
     allow_headers=['*']
 )
 
 redis = get_redis_connection(
-    host = "redis-19627.c244.us-east-1-2.ec2.cloud.redislabs.com",
-    port = 19627,
-    password = "hMOz4gdd0QfupmF4MXRVNMOgFqLNAlA5",
+    host = "redis-11931.c276.us-east-1-2.ec2.cloud.redislabs.com",
+    port = 11931,
+    password = "lRbkkruK6m2oE2rrsDoz63Mzr4O6Mb4i",
     decode_responses = True
 )
 
@@ -40,7 +32,6 @@ def all():
 
 def format(pk:str):
     product = Product.get(pk)
-    print(product)
     return {
         'id':product.pk,
         'name': product.name,
